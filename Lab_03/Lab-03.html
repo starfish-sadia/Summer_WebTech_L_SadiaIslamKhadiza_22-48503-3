@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>CSS</title>
+<style>
+
+  header, p, span, ul, .link-box {
+    font-family: Arial, sans-serif;
+  }
+
+  header {
+    color: black;
+    font-weight: bold;
+    font-size: 24px;
+  }
+
+  .color2 {
+    color: green;
+    font-family: 'Courier New', monospace;
+    font-size: 16px;
+  }
+
+  #color3 {
+    color: red;
+    font-family: Georgia, serif;
+    font-size: 16px;
+  }
+
+  ul {
+    border: 2px solid black;
+    padding: 10px;
+    max-width: 200px;
+  }
+
+  .link-box {
+    width: 100px;
+    height: 20px;
+    border: 2px solid black;
+    margin-top: 20px;
+    padding: 10px;
+    position: relative;
+  }
+
+  .link-box a {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    text-decoration: none;
+    color: blue;
+    font-weight: bold;
+  }
+
+  .below-content-container {
+    position: relative;
+    height: 200px; 
+    margin-top: 50px;
+  }
+
+  .box {
+    position: absolute;
+    width: 150px;
+    height: 150px;
+    opacity: 0.7;
+  }
+
+  .box1 {
+    background-color: red;
+    top: 0;
+    left: 0;
+    z-index: 3;
+  }
+
+  .box2 {
+    background-color: green;
+    top: 40px;
+    left: 40px;
+    z-index: 2;
+  }
+
+  .box3 {
+    background-color: blue;
+    top: 80px;
+    left: 80px;
+    z-index: 1;
+  }
+
+  
+  .overflow-div {
+    width: 300px;
+    height: 100px;
+    border: 2px solid #000;
+    margin-top: 30px;
+    padding: 10px;
+    overflow: auto; 
+    font-family: Verdana, sans-serif;
+    font-size: 14px;
+    background-color: #f9f9f9;
+  }
+</style>
+</head>
+<body>
+
+<header>Lab 03 on CSS</header>
+
+<p class="color2">Sadia with color green</p>
+<p class="color2">Samia with color green</p>
+<p id="color3">Jahin with color red</p>
+<span class="color2">Span with color green</span>
+
+<ul>
+  <li>Sadia</li>
+  <li>Samia</li>
+  <li>Jahin</li>
+  <li>Mahmud</li>
+</ul>
+
+<div class="link-box">
+  <a href="https://en.wikipedia.org/wiki/List_of_Barbie_films" target="_blank" rel="noopener noreferrer">Website link</a>
+</div>
+
+<div class="below-content-container">
+  <div class="box box1"></div>
+  <div class="box box2"></div>
+  <div class="box box3"></div>
+</div>
+
+<br>
+
+<div class="overflow-div">
+  Geographically, the Viking Age covered Scandinavian lands (modern Denmark, Norway and Sweden), as well as territories under North Germanic dominance, mainly the Danelaw, including Scandinavian York, the administrative centre of the remains of the Kingdom of Northumbria, parts of Mercia, and East Anglia.
+</div>
+
+</body>
+</html>
