@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Lab Task 04</title>
+  <style>
+    body {
+      font-family: "Times New Roman", serif;
+      max-width: 400px;
+      margin: 50px 0 0 20px; 
+      padding: 0 20px 20px 0;
+      text-align: left;
+    }
+    h1, h2 {
+      margin-top: 20px;
+      margin-bottom: 10px;
+    }
+    #count {
+      font-size: 48px;
+      margin: 20px 0;
+      text-align: left;
+    }
+    button {
+      font-size: 18px;
+      padding: 8px 16px;
+      margin: 8px 8px 8px 0;
+
+      background-color: rgb(78, 169, 223);
+      cursor: pointer;
+    }
+    input {
+      font-size: 16px;
+      padding: 8px;
+      width: 100%;
+      margin: 8px 0 16px 0;
+      box-sizing: border-box;
+    }
+    #bmi-result, #color-box, #form-message {
+      margin-top: 20px;
+      font-weight: bold;
+      font-size: 18px;
+      text-align: left;
+    }
+    #color-box {
+      border: 2px solid rgb(17, 5, 5);
+      padding: 15px;
+      color: black;
+      width: fit-content;
+    }
+    form {
+      text-align: left;
+      margin-top: 30px;
+      border: 1px solid #cccccc;
+      padding: 15px;
+      border-radius: 6px;
+      background: #f9f9f9;
+      max-width: 400px;
+    }
+    label {
+      display: block;
+      margin-top: 10px;
+      font-weight: bold;
+    }
+    .error {
+      color: red;
+    }
+    .success {
+      color: green;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Counter</h1>
+  <div id="count">0</div>
+  <button id="incBtn">Increment</button>
+  <button id="decBtn">Decrement</button>
+
+  <h2>BMI Calculator</h2>
+  <label>Weight (kg):</label>
+  <input type="number" id="weight" placeholder="Weight in kg" >
+  
+  <label>Height (cm):</label>
+  <input type="number" id="height" placeholder="Height in cm" >
+  
+  <button id="calcBMI">BMI Calculator</button>
+  
+  <div id="bmi-result"></div>
+
+  <h2>Change Text Color</h2>
+  <label>Enter text color:</label>
+  <input type="text" id="colorInput" placeholder="e.g. red or #00ff00" >
+  <button id="changeColorBtn">Change Color</button>
+  
+  <div id="color-box">Anneyonghaseyo</div>
+
+  <h2>User Registration</h2>
+  <form id="regForm">
+    <label>Password:</label>
+    <input type="password" id="password" placeholder="Enter password" >
+    <label>Confirm Password:</label>
+    <input type="password" id="confirmPassword" placeholder="Confirm password" >
+    <button type="submit">Register</button>
+    <div id="form-message"></div>
+  </form>
+
+  <script>
+    var count = 0;
+    var countDiv = document.getElementById('count');
+    document.getElementById('incBtn').onclick = function()
+    {
+      count++;
+      countDiv.textContent = count;
+    };
+    document.getElementById('decBtn').onclick = function()
+    {
+      count--;
+      countDiv.textContent = count;
+    };
+
+    document.getElementById('calcBMI').onclick = function() 
+    {
+      var weight = parseFloat(document.getElementById('weight').value);
+      var height = parseFloat(document.getElementById('height').value);
+      var resultDiv = document.getElementById('bmi-result');
+
+      if (!weight || weight <= 0) 
+      {
+        resultDiv.textContent = "Please enter a valid weight.";
+        resultDiv.className = "error";
+        return;
+      }
+      if (!height || height <= 0)
+      {
+        resultDiv.textContent = "Please enter a valid height.";
+        resultDiv.className = "error";
+        return;
+      }
+
+      var heightM = height / 100;
+      var bmi = weight / (heightM * heightM);
+      var category = "";
+
+      if (bmi < 18.5)
+      {
+        category = "Underweight";
+      } else if (bmi < 24.9)
+      {
+        category = "Normal weight";
+      } else if (bmi < 29.9)
+      {
+        category = "Overweight";
+      } else
+      {
+        category = "Obesity";
+      }
+      
+      resultDiv.textContent = "Your BMI is " + bmi.toFixed(2) + " (" + category + ")";
+      resultDiv.className = "success";
+    };
+
+    document.getElementById('changeColorBtn').onclick = function() {
+      var color = document.getElementById('colorInput').value.trim();
+      var colorBox = document.getElementById('color-box');
+
+      if (!color)
+      {
+        alert("Please enter a color.");
+        return;
+      }
+
+      colorBox.style.color = color;
+
+      var testColor = window.getComputedStyle(colorBox).color;
+      if (testColor === "rgba(0, 0, 0, 0)" || testColor === "transparent") {
+        alert("Invalid color value!");
+        colorBox.style.color = "black";
+      }
+    };
+
+    document.getElementById('regForm').onsubmit = function(event) {
+      event.preventDefault();
+
+      var password = document.getElementById('password').value;
+      var confirmPassword = document.getElementById('confirmPassword').value;
+      var messageDiv = document.getElementById('form-message');
+
+  
+      if (password.length < 8) {
+        messageDiv.textContent = "Password must be at least 8 characters.";
+        messageDiv.className = "error";
+        return;
+      }
+      if (!(/[A-Z]/.test(password))) {
+        messageDiv.textContent = "Password must have at least one uppercase letter.";
+        messageDiv.className = "error";
+        return;
+      }
+      if (!(/[a-z]/.test(password))) {
+        messageDiv.textContent = "Password must have at least one lowercase letter.";
+        messageDiv.className = "error";
+        return;
+      }
+      if (!(/[0-9]/.test(password))) {
+        messageDiv.textContent = "Password must have at least one number.";
+        messageDiv.className = "error";
+        return;
+      }
+
+      if (password !== confirmPassword) {
+        messageDiv.textContent = "Passwords do not match.";
+        messageDiv.className = "error";
+        return;
+      }
+
+      messageDiv.textContent = "Registration successful!";
+      messageDiv.className = "success";
+
+    
+      this.reset();
+    };
+  </script>
+
+</body>
+</html>
